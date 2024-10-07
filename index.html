@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guess a number</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="wrapper">
+    <div class="guess-game">
+      <h1>A Guessing Game</h1>
+      <p>Guess a number between 0-100.</p>
+      <input id="input" type="text" placeholder="0-100" value="">
+      <div id="prompt" class="prompt">Lets go</div>
+      <button class="btn">Have a Guess</button>
+      <div class="stats">
+        <div class="last-guess grow">
+          <h2>Last Guess:</h2>
+          <h3 id="last-guess">-</h3>
+        </div>
+        <div class="clue grow">
+          <h2>Clue:</h2>
+          <h3 id="clue">-</h3>
+        </div>
+        <div class="total-guesses grow">
+          <h2>Total:</h2>
+          <h3 id="total-guesses">0</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
