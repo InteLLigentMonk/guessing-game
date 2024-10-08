@@ -41,44 +41,48 @@ document.addEventListener('keypress', (e) => {
         totalGuesses.style.color ='var(--clr-error)';
       }
 
-      // Update the last guess field to the entered value.
-      lastGuess.textContent = guess.value;
       
-      // Show the previous guesses box after first guess.
       if(listArray.length >= 0){
+        // Show the previous guesses box after first guess.
         document.querySelector('.guess-box').classList.add('display-flex');
-      }
-
-      // Assemble array of guesses and output to guess-box
-      listArray.push(guess.value);
-      listItem = '';
-      listArray.forEach((element)=>{
-        listItem += `<li>${element}, </li>`;
-      })
-      list.innerHTML = listItem;
-
-      if(guess.value == rightAnswere){
-        // If guess is right do this:
-        promptMessage('#67c787','You won! Page will reload so you can try again!');
-        clue.textContent = 'Winner';
-        clue.style.color = 'var(--clr-success)';
-        total++;
-        totalGuesses.textContent = total;
-        setTimeout(function() {
-          location.reload();
-        }, 4500);
-      }else if( guess.value < rightAnswere){
-        // If guess is low do this:
-        clue.textContent = 'Low';
-        clue.style.color = 'var(--clr-warning)';
-        total++;
-        totalGuesses.textContent = total;
-      } else {
-        // If guess is high do this:
-        clue.textContent = 'High';
-        clue.style.color = 'var(--clr-info)';
-        total++;
-        totalGuesses.textContent = total;
+        if(!listArray.includes(guess.value)){
+          
+          // Update the last guess field to the entered value.
+          lastGuess.textContent = guess.value;
+          
+          // Assemble array of guesses and output to guess-box
+          listArray.push(guess.value);
+          listItem = '';
+          listArray.forEach((element)=>{
+            listItem += `<li>${element}, </li>`;
+          })
+          list.innerHTML = listItem;
+          if(guess.value == rightAnswere){
+            // If guess is right do this:
+            promptMessage('#67c787','You won! Page will reload so you can try again!');
+            clue.textContent = 'Winner';
+            clue.style.color = 'var(--clr-success)';
+            total++;
+            totalGuesses.textContent = total;
+            setTimeout(function() {
+              location.reload();
+            }, 4500);
+          }else if( guess.value < rightAnswere){
+            // If guess is low do this:
+            clue.textContent = 'Low';
+            clue.style.color = 'var(--clr-warning)';
+            total++;
+            totalGuesses.textContent = total;
+          } else {
+            // If guess is high do this:
+            clue.textContent = 'High';
+            clue.style.color = 'var(--clr-info)';
+            total++;
+            totalGuesses.textContent = total;
+          }
+        } else {
+          promptMessage('#67b8c7','You already tried that number, guess again!');
+        }
       }
     } else {
       promptMessage('#c76767','You must enter a value between 0-100');
