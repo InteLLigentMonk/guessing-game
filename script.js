@@ -6,6 +6,8 @@ let prompt = document.querySelector('#prompt');
 let lastGuess = document.querySelector('#last-guess');
 let clue = document.querySelector('#clue');
 let totalGuesses = document.querySelector('#total-guesses');
+let list = document.querySelector('#list');
+let listArray = [];
 let total = 0;
 // Variable declarations
 
@@ -21,12 +23,12 @@ function promptMessage(color, text){
   prompt.textContent = text;
   setTimeout(function() {
     prompt.style.opacity = 0;
-}, 5000);
+  }, 3000);
 }
 // Global functions
 
 
-document.addEventListener('keypress', function (e) {
+document.addEventListener('keypress', (e) => {
   if (e.key === 'Enter') {
     if(isBetween0And100(guess.value)){
       
@@ -42,27 +44,44 @@ document.addEventListener('keypress', function (e) {
       // Update the last guess field to the entered value.
       lastGuess.textContent = guess.value;
       
+      if(listArray.length >= 0){
+        document.querySelector('.guess-box').classList.add('display-flex');
+      }
+      
+      // Assemble array of guesses and output to guess-box
+      listArray.push(guess.value);
+      listItem = '';
+      listArray.forEach((element)=>{
+        listItem += `<li>${element}, </li>`;
+      })
+      list.innerHTML = listItem;
+
+
       
       if(guess.value == rightAnswere){
+        // If guess is right do this:
         promptMessage('#67c787','You won! Refresh page (F5) to try again');
         clue.textContent = 'Winner';
         clue.style.color = 'var(--clr-success)';
         total++;
         totalGuesses.textContent = total;
       }else if( guess.value < rightAnswere){
+        // If guess is low do this:
         clue.textContent = 'Low';
         clue.style.color = 'var(--clr-warning)';
         total++;
         totalGuesses.textContent = total;
-      }else {
+      } else {
+        // If guess is high do this:
         clue.textContent = 'High';
         clue.style.color = 'var(--clr-info)';
         total++;
         totalGuesses.textContent = total;
       }
-    }else{
+    } else {
       promptMessage('#c76767','You must enter a value between 0-100');
     }
+
+    guess.value = '';
   }
 })
-

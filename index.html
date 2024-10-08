@@ -9,11 +9,11 @@
 <body>
 
   <div class="wrapper">
+    <div id="prompt" class="prompt"></div>
     <div class="guess-game">
       <h1>A Guessing Game</h1>
       <p>Guess a number between 0-100.</p>
-      <input id="input" type="text" placeholder="0-100" value="">
-      <!-- <button class="btn">Have a Guess</button> -->
+      <input id="input" type="text" placeholder="0-100" value="" autofocus>
       <div class="stats">
         <div class="last-guess grow">
           <h2>Last Guess:</h2>
@@ -29,7 +29,11 @@
         </div>
       </div>
     </div>
-    <div id="prompt" class="prompt">Lets go</div>
+    <div class="guess-box">
+      <h4>Previous Guesses</h4>
+      <ul id="list">
+      </ul>
+    </div>
   </div>
   <script src="script.js"></script>
 </body>
