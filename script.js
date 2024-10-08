@@ -44,10 +44,11 @@ document.addEventListener('keypress', (e) => {
       // Update the last guess field to the entered value.
       lastGuess.textContent = guess.value;
       
+      // Show the previous guesses box after first guess.
       if(listArray.length >= 0){
         document.querySelector('.guess-box').classList.add('display-flex');
       }
-      
+
       // Assemble array of guesses and output to guess-box
       listArray.push(guess.value);
       listItem = '';
@@ -56,15 +57,16 @@ document.addEventListener('keypress', (e) => {
       })
       list.innerHTML = listItem;
 
-
-      
       if(guess.value == rightAnswere){
         // If guess is right do this:
-        promptMessage('#67c787','You won! Refresh page (F5) to try again');
+        promptMessage('#67c787','You won! Page will reload so you can try again!');
         clue.textContent = 'Winner';
         clue.style.color = 'var(--clr-success)';
         total++;
         totalGuesses.textContent = total;
+        setTimeout(function() {
+          location.reload();
+        }, 4500);
       }else if( guess.value < rightAnswere){
         // If guess is low do this:
         clue.textContent = 'Low';
